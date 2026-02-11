@@ -19,10 +19,13 @@ router.get('/', async (req, res) => {
 
     // If search query exists, filter by subject name OR subject code
     if (search) {
+
+      const searchPattern = `%${String(search).replace(/[%_]/g, '\\$&')}%`;
+
       filterConditions.push(
         or(
-          ilike(subjects.name, `%${search}%`),
-          ilike(subjects.code, `%${search}%`),
+          ilike(subjects.name, searchPattern),
+          ilike(subjects.code, searchPattern),
         )
       );
     }
@@ -42,7 +45,7 @@ router.get('/', async (req, res) => {
       .leftJoin(departments, eq(subjects.departmentId, departments.id))
       .where(whereClause);
 
-    const totalCount = countResult[0]?.count ?? 0;
+    const totalCount = Number(countResult[0]?.count ?? 0);
 
     const subjectsList = await db
       .select({
