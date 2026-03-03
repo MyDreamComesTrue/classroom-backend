@@ -15,6 +15,13 @@
       "when": 1772501156698,
       "tag": "0001_classy_juggernaut",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1772505901954,
+      "tag": "0002_magenta_black_bolt",
+      "breakpoints": true
     }
   ]
 }
