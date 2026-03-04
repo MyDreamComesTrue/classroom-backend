@@ -11,6 +11,7 @@ if (!FRONTEND_URL) throw new Error("FRONTEND_URL is not set");
 
 export const auth = betterAuth({
   secret: BETTER_AUTH_SECRET,
+  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:8000",
   trustedOrigins: [FRONTEND_URL],
   database: drizzleAdapter(db, {
     provider: "pg",
